@@ -1,0 +1,14 @@
+# Ignore OS files
+.DS_Store
+.nova
+
+# Ignore deployment files
+.env
+.vagrant/
+
+# Ignore laminas component and development
+vendor/
+
+!data/cache/.gitkeep
+phpunit.xml
+.phpunit.result.cache
