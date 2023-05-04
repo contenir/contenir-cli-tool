@@ -6,7 +6,6 @@ namespace Contenir\Cli\Tool\Command;
 
 use Laminas\Cli\Command\AbstractParamAwareCommand;
 use Laminas\Code\Generator;
-use Laminas\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -246,7 +245,8 @@ class CreateComponentCommand extends AbstractParamAwareCommand
             ->setName($this->getComponentName(false, true))
             ->setExtendedClass($this->createComponentExtendedClass())
             ->addProperties($this->createComponentProperties())
-            ->addMethods($this->createComponentMethods());
+            ->addMethods($this->createComponentMethods())
+            ->setImplementedInterfaces($this->createComponentInterfaces());
 
         foreach ($this->createComponentUses() as $alias => $use) {
             if (! is_int($alias)) {
@@ -262,6 +262,12 @@ class CreateComponentCommand extends AbstractParamAwareCommand
     protected function createComponentUses(): array
     {
         return [
+        ];
+    }
+
+    protected function createComponentInterfaces(): array
+    {
+        return[
         ];
     }
 
@@ -289,9 +295,7 @@ class CreateComponentCommand extends AbstractParamAwareCommand
             ->setName($this->getComponentName(true))
             ->addProperties($this->createComponentFactoryProperties())
             ->addMethods($this->createComponentFactoryMethods())
-            ->setImplementedInterfaces([
-                'Laminas\\ServiceManager\\Factory\\FactoryInterface'
-            ]);
+            ->setImplementedInterfaces($this->createComponentFactoryInterfaces());
 
         foreach ($this->createComponentFactoryUses() as $alias => $use) {
             if (! is_int($alias)) {
@@ -309,6 +313,13 @@ class CreateComponentCommand extends AbstractParamAwareCommand
         return [
             $this->getComponentName(false, true),
             'Psr\\Container\\ContainerInterface',
+            'Laminas\\ServiceManager\\Factory\\FactoryInterface'
+        ];
+    }
+
+    protected function createComponentFactoryInterfaces(): array
+    {
+        return[
             'Laminas\\ServiceManager\\Factory\\FactoryInterface'
         ];
     }
