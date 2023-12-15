@@ -23,8 +23,8 @@
         }
     },
     "require": {
-        "php": "^7.3 || ~8.0.0",
-        "laminas/laminas-cli": "1.9.x-dev",
+        "php": "^8.0.0",
+        "laminas/laminas-cli": "^1.8",
         "laminas/laminas-code": "^4.0",
         "laminas/laminas-filter": "^2.0",
         "laminas/laminas-mvc": "^3.0"
